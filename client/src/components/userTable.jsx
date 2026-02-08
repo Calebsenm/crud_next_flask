@@ -5,14 +5,14 @@ import styles from "@/components/estilos.module.css"
 import { useState } from "react";
 import Modal from "./Modal";
 import Formulario from "./Formulario";
-
+import url_backend from "../env";
 
 export default function Dato({ empresa }) {
 
     const [showModal, setShowModal] = useState(false);
 
     const deleteUsers = async id => {
-        const url = `http://localhost:5000/api/empresas/${id}`;
+        const url = `${url_backend}/empresas/${id}`;
         const response = await fetch(url, {
             method: "DELETE"
         });

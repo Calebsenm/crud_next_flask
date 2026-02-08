@@ -3,9 +3,11 @@
 
 import styles from "@/components/estilos.module.css"
 import React, { useState, useEffect } from 'react';
+import url_backend from "../env";
 
 // URL del Servidor del backend.
-const url = 'http://localhost:5000/api/empresas';
+const url = `${url_backend}/empresas`;
+
 
 
 function Formulario({ id }) {

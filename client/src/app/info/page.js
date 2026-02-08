@@ -2,7 +2,7 @@
 "use client"
 import Dato from '@/components/userTable';
 import { useState, useEffect } from "react";
-
+import url_backend from "../../env";
 
 
 function Info() {
@@ -12,7 +12,7 @@ function Info() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("http://localhost:5000/api/empresas");
+      const res = await fetch(`${url_backend}/empresas`);
       const emp = await res.json();
       setEmpresas(emp);
     };
