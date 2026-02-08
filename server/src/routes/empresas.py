@@ -23,6 +23,12 @@ def get_empresas():
 def create_empresa():
     new_empresa = request.get_json()
 
+      
+    required_fields = ['nombre_empresa', 'direccion', 'nit', 'telefono', 'correo']
+    for field in required_fields:
+        if field not in new_empresa:
+            return jsonify({'error': f'Campo faltante: {field}'}), 400
+                
     nombre_empresa  = new_empresa['nombre_empresa']
     direccion = new_empresa['direccion']
     nit = new_empresa['nit']

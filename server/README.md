@@ -52,3 +52,9 @@ docker run -t -p 8000:8000 \
 # 4. Si necesitas nuevas migraciones, las haces en tu máquina
 # y luego reinicias el contenedor
 docker restart mi-backend
+
+
+## Test 
+pytest tests
+
++ pytest tests/test_database.py -v
