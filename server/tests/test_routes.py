@@ -7,7 +7,7 @@ def test_home_route(client):
     response = client.get("/")
     assert response.status_code == 200
     data = json.loads(response.data)
-    assert data["message"] == "API Flask funcionando"
+    assert data["message"] == "API Working"
 
 def test_get_empresas(client, mock_db_connection):
     """Test para GET /api/empresas"""
