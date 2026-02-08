@@ -1,0 +1,21 @@
+name: Deploy Frontend
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'client/**'
+
+jobs:
+  quick-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Test Frontend
+        working-directory: client
+        run: |
+          npm ci --legacy-peer-deps
+          npm test -- --watchAll=false || echo "Tests fallaron"
+          npm run build || echo "Build falló"

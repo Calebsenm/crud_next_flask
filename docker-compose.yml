@@ -2,26 +2,22 @@
 version: '3.8'
 
 services:
-  client:
-    build:
-      context: ./client
-      args:
-        NEXT_PUBLIC_API_URL: "http://localhost:8000" 
-    ports:
-      - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8000
-    depends_on:
-      - server
-
   server:
     build: ./server
-    ports:
-      - "8000:8000"
+    network_mode: "host"  
     environment:
-      
-      DB_HOST: 172.17.0.1          
+      DB_HOST: localhost  
       DB_PORT: 5432
       DB_DATABASE: flask_demo
       DB_USER: postgres
       DB_PASSWORD: admin
+
+  client:
+    build:
+      context: ./client
+      args:
+        NEXT_PUBLIC_API_URL: "http://localhost:8000"
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
