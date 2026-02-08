@@ -27,3 +27,28 @@ flask --app src/main.py  run
 
 ### Deploy :
 gunicorn --bind 0.0.0.0:8000 src.main:app
+
+
+### Deploy:
+
+# 1. Desarrollo normal
+# Migraciones manuales cuando cambias la BD
+migrate -path=./migrations -database=$FLASKDB_DSN up
+
+# 2. Construyes la app
+docker build -t backend-app .
+
+# 3. La ejecutas (conectada a tu BD local)
+docker run -t -p 8000:8000 \
+  --network="host" \
+  --name mi-backend \
+  -e DB_HOST=localhost \
+  -e DB_PORT=5432 \
+  -e DB_DATABASE=flask_demo \
+  -e DB_USER=postgres \
+  -e DB_PASSWORD=admin \
+  backend-app
+
+# 4. Si necesitas nuevas migraciones, las haces en tu máquina
+# y luego reinicias el contenedor
+docker restart mi-backend
